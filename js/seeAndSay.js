@@ -47,7 +47,6 @@ const model = {
 
 // Define a function that grabs a random word & removes it from the list
 function getWord(type) {
-
   // Define a random index
   let randIndex = Math.floor(Math.random() * model[type].length);
 
@@ -63,7 +62,6 @@ function getWord(type) {
 
 // Define a function that returns an Element from the table's body
 function getData(x = 0, y = 0) {
-
   // Return the element located at x, y in the table's body
   return document.querySelector(
     `table tbody tr:nth-child(${x + 1}) td:nth-child(${y + 1})`
@@ -72,7 +70,6 @@ function getData(x = 0, y = 0) {
 
 // Define a functions that creates and fills in parts of my table
 function generateTable() {
-
   // Add an array to store our buttons
   let buttonArray = [];
 
@@ -85,7 +82,6 @@ function generateTable() {
 
   // While there are less than 6 rows in the table, add one
   while (document.querySelectorAll("table tbody tr").length < 6) {
-
     // Add a row to the table's body
     tableBody.appendChild(document.createElement("tr"));
   }
@@ -98,13 +94,11 @@ function generateTable() {
 
   // For each of the table headers
   tableHeaders.forEach((header, i) => {
-
     // Define the header's type for later use
     let type = header.dataset.type;
 
     // From 1-6...
     for (let r = 1; r <= 6; r++) {
-
       // Create the new table data cell
       let newRowData = document.createElement("td");
 
@@ -141,11 +135,10 @@ function generateTable() {
 
     // Create an anonymous function for the buttons
     rowButton.addEventListener("click", (event) => {
-
       // Grab the row index from the element, otherwise 0
       let index = Number(event.target.dataset.index) ?? 0;
 
-      // Grab the column index from the element 
+      // Grab the column index from the element
       let buttonColumnIndex = Number(event.target.dataset.columnIndex);
 
       // Increment the index by 1
@@ -174,24 +167,19 @@ function generateTable() {
   });
 
   // Add an eventlistener to the submit button to handle the click
-  submitButton.addEventListener("click", (event) => { 
-    
+  submitButton.addEventListener("click", (event) => {
     // Create the output string
     let outputString = "";
 
     // For each button in the button row..
-    buttonArray.forEach((btn, i) => { 
-
-      outputString = `${outputString} ${btn.innerText}`
-
+    buttonArray.forEach((btn, i) => {
+      outputString = `${outputString} ${btn.innerText}`;
     });
 
     // Capitalize the first letter and set the output text
-    outputSentence.innerText = outputString.charAt(0).toUpperCase() + outputString.slice(1);
-
-  } );
-
-
+    outputSentence.innerText =
+      outputString.charAt(0).toUpperCase() + outputString.slice(1);
+  });
 }
 
 // Run the function !
