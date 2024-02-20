@@ -178,7 +178,7 @@ function generateTable() {
 
     // Capitalize the first letter and set the output text
     outputSentence.innerText =
-      outputString.charAt(0).toUpperCase() + outputString.slice(1);
+      outputString.charAt(1).toUpperCase() + outputString.slice(2);
   });
 }
 
