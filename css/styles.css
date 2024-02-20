@@ -8,22 +8,24 @@ html {
 
 main {
   padding: 4rem 8rem;
+}
+
+main, table {
   width: 100%;
 }
-main table {
-  width: 100%;
-}
-main table h1 {
+
+h1 {
   font-weight: 800;
   font-size: 2rem;
   padding: 2rem;
 }
-main table h2 {
+
+h2 {
   font-weight: 600;
   font-size: 1.5rem;
 }
 
-table tr td {
+table td {
   border: 1px black solid;
   min-width: 168px;
   max-width: 168px;
@@ -31,11 +33,15 @@ table tr td {
   border-radius: 1rem;
 }
 
-table tr td button {
+button {
   width: 100%;
   padding: 1rem;
 }
 
-.selected {
-  background: brown;
+section {
+  width: 100%;
+  border: 1px solid red;
+}
+section h1 {
+  text-align: center;
 }

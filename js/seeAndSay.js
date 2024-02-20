@@ -73,8 +73,15 @@ function getData(x = 0, y = 0) {
 // Define a functions that creates and fills in parts of my table
 function generateTable() {
 
+  // Add an array to store our buttons
+  let buttonArray = [];
+
   // Store all of the headers of the table
   const tableHeaders = document.querySelectorAll(`th`);
+
+  // Output variables
+  const submitButton = document.querySelector("section button");
+  const outputSentence = document.querySelector("section h1");
 
   // While there are less than 6 rows in the table, add one
   while (document.querySelectorAll("table tbody tr").length < 6) {
@@ -160,9 +167,31 @@ function generateTable() {
     // Add the button to the data element
     buttonRowData.appendChild(rowButton);
 
+    buttonArray.push(rowButton);
+
     // Add the data element to the table row
     buttonRow.appendChild(buttonRowData);
   });
+
+  // Add an eventlistener to the submit button to handle the click
+  submitButton.addEventListener("click", (event) => { 
+    
+    // Create the output string
+    let outputString = "";
+
+    // For each button in the button row..
+    buttonArray.forEach((btn, i) => { 
+
+      outputString = `${outputString} ${btn.innerText}`
+
+    });
+
+    // Capitalize the first letter and set the output text
+    outputSentence.innerText = outputString.charAt(0).toUpperCase() + outputString.slice(1);
+
+  } );
+
+
 }
 
 // Run the function !
