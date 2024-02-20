@@ -1,12 +1,15 @@
+// © Quinn Faulkner 2024
+
+// Some global variables !
 const t = document.querySelector("tbody");
 const T = document.querySelector("table");
 const tHeader = document.querySelector("thead tr");
 const tableBody = document.querySelector("table tbody");
 const tableFooter = document.querySelector("table tfoot");
 
-const sentence = document.querySelector("main > div");
-
+// Define some prefixes
 const prefixes = ["a", "the"];
+
 // Defining my Dungeons & Dragons themed words
 const model = {
   nouns: [
@@ -42,50 +45,59 @@ const model = {
   ],
 };
 
+// Define a function that grabs a random word & removes it from the list
 function getWord(type) {
+
+  // Define a random index
   let randIndex = Math.floor(Math.random() * model[type].length);
+
+  // Grab the word at that index in the model
   let output = model[type][randIndex];
 
+  // Remove the word from the model
   model[type].splice(randIndex, 1);
 
+  // Return the word
   return output;
 }
 
-function regenerateSentence() {
-  tableHeaders.forEach((header, i) => {});
-
-  sentence;
-}
-
+// Define a function that returns an Element from the table's body
 function getData(x = 0, y = 0) {
+
+  // Return the element located at x, y in the table's body
   return document.querySelector(
     `table tbody tr:nth-child(${x + 1}) td:nth-child(${y + 1})`
   );
 }
 
-function regenerateTable() {
-  // Create a copy of the model for reference later
-  const OG_MODEL = { ...model };
+// Define a functions that creates and fills in parts of my table
+function generateTable() {
 
+  // Store all of the headers of the table
   const tableHeaders = document.querySelectorAll(`th`);
 
+  // While there are less than 6 rows in the table, add one
   while (document.querySelectorAll("table tbody tr").length < 6) {
+
+    // Add a row to the table's body
     tableBody.appendChild(document.createElement("tr"));
   }
 
+  // Create a row for the buttons at the end
   const buttonRow = document.createElement("tr");
 
-  buttonRow.setAttribute("id", "buttons");
-
+  // Add the row of buttons to the table
   tableFooter.appendChild(buttonRow);
 
+  // For each of the table headers
   tableHeaders.forEach((header, i) => {
-    //console.log(`i : [${i}]`)
+
     // Define the header's type for later use
     let type = header.dataset.type;
 
-    // For each row
+    // From 1-6...
     for (let r = 1; r <= 6; r++) {
+
       // Create the new table data cell
       let newRowData = document.createElement("td");
 
@@ -107,31 +119,51 @@ function regenerateTable() {
       row.appendChild(newRowData);
     }
 
+    // Create a button
     let rowButton = document.createElement("button");
+
+    // Create a table data element for the button
     let buttonRowData = document.createElement("td");
 
+    // Set the values of the button for display
     rowButton.dataset.index = 0;
     rowButton.dataset.columnIndex = i;
+
+    // Set the text to the first row
     rowButton.innerText = getData(0, i).innerText;
 
+    // Create an anonymous function for the buttons
     rowButton.addEventListener("click", (event) => {
+
+      // Grab the row index from the element, otherwise 0
       let index = Number(event.target.dataset.index) ?? 0;
+
+      // Grab the column index from the element 
       let buttonColumnIndex = Number(event.target.dataset.columnIndex);
 
+      // Increment the index by 1
       index++;
 
+      // If the index is greater than or equal to 6, cycle it back to the first
       if (index >= 6) index = 0;
 
+      // Grab the data element from the table
       let newData = getData(index, buttonColumnIndex);
 
+      // Set the inner text of the button to the inner text of the table data element
       event.target.innerText = newData.innerText;
 
+      // Set the index to the new updated value
       event.target.dataset.index = index;
     });
 
+    // Add the button to the data element
     buttonRowData.appendChild(rowButton);
+
+    // Add the data element to the table row
     buttonRow.appendChild(buttonRowData);
   });
 }
 
-regenerateTable();
+// Run the function !
+generateTable();
