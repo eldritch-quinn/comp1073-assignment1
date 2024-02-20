@@ -32,6 +32,12 @@ table td {
   padding: 1rem;
   border-radius: 1rem;
 }
+table th {
+  padding: 1rem;
+  background: brown;
+  color: white;
+  border: 1px white solid;
+}
 
 button {
   width: 100%;
